@@ -7,20 +7,22 @@ public class ArrayStorage {
     private int counter;
 
     void clear() {
-        for (int i = 0; i < counter; i++)
+        for (int i = 0; i < counter; i++) {
             storage[i] = null;
+        }
         counter = 0;
     }
 
-    void save(Resume r) {
-        storage[counter] = r;
+    void save(Resume resume) {
+        storage[counter] = resume;
         counter++;
     }
 
     Resume get(String uuid) {
         for (int i = 0; i < counter; i++) {
-            if (storage[i].uuid.equals(uuid))
-            return storage[i];
+            if (storage[i].uuid.equals(uuid)) {
+                return storage[i];
+            }
         }
         return null;
     }
@@ -28,10 +30,15 @@ public class ArrayStorage {
     void delete(String uuid) {
         for (int i = 0; i < counter; i++) {
             if (storage[i].uuid.equals(uuid)) {
-                //for (int j = i; j < counter; j++)
-                // storage[j] = storage[j+1];
-                System.arraycopy(storage, i + 1, storage, i, counter - i);
+                if (counter - 1 - i >= 0) {
+                    System.arraycopy(storage, i + 1, storage, i, counter - 1 - i);
+                    storage[counter - 1] = null;
+                }
+                //for (int j = i; j < counter-1; j++)
+                //    storage[j] = storage[j+1];
+                //storage [counter-1] = null;
                 counter--;
+                break;
             }
         }
     }
@@ -40,11 +47,11 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        Resume[] buff = new Resume[counter];
+        Resume[] resumes = new Resume[counter];
         //for (int i = 0; i < counter; i++)
-        //      buff[i] = storage[i];
-        System.arraycopy(storage, 0, buff, 0, counter);
-        return buff;
+        //      resumes[i] = storage[i];
+        System.arraycopy(storage, 0, resumes, 0, counter);
+        return resumes;
     }
 
     int size() {
