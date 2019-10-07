@@ -11,6 +11,8 @@ public class MainTestArrayStorage {
         r2.uuid = "uuid2";
         Resume r3 = new Resume();
         r3.uuid = "uuid3";
+        Resume r4 = new Resume();
+        r4.uuid = "uuid2";
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);
@@ -24,6 +26,13 @@ public class MainTestArrayStorage {
         printAll();
         ARRAY_STORAGE.delete(r1.uuid);
         printAll();
+
+        printAll();
+        printHashAll();
+        ARRAY_STORAGE.update(r4);
+        printHashAll();
+        printAll();
+
         ARRAY_STORAGE.clear();
         printAll();
 
@@ -34,6 +43,13 @@ public class MainTestArrayStorage {
         System.out.println("\nGet All");
         for (Resume r : ARRAY_STORAGE.getAll()) {
             System.out.println(r);
+        }
+    }
+
+    static void printHashAll() {
+        System.out.println("\nHash All");
+        for (Resume r : ARRAY_STORAGE.getAll()) {
+            System.out.println(r.hashCode());
         }
     }
 }

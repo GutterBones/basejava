@@ -13,7 +13,7 @@ public class MainArray {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         Resume r;
         while (true) {
-            System.out.print("Введите одну из команд - (list | save uuid | delete uuid | get uuid | clear | exit): ");
+            System.out.print("Введите одну из команд - (list | save uuid | update uuid | delete uuid | get uuid | clear | exit): ");
             String[] params = reader.readLine().trim().toLowerCase().split(" ");
             if (params.length < 1 || params.length > 2) {
                 System.out.println("Неверная команда.");
@@ -34,6 +34,16 @@ public class MainArray {
                     r = new Resume();
                     r.uuid = uuid;
                     ARRAY_STORAGE.save(r);
+                    printAll();
+                    break;
+                case "update":
+                    r = new Resume();
+                    r.uuid = uuid;
+                    System.out.println("Old Hash: ");
+                    hashAll();
+                    ARRAY_STORAGE.update(r);
+                    System.out.println("New hash: ");
+                    hashAll();
                     printAll();
                     break;
                 case "delete":
@@ -64,6 +74,19 @@ public class MainArray {
         } else {
             for (Resume r : all) {
                 System.out.println(r);
+            }
+        }
+        System.out.println("----------------------------");
+    }
+
+    static void hashAll() {
+        Resume[] all = ARRAY_STORAGE.getAll();
+        System.out.println("----------------------------");
+        if (all.length == 0) {
+            System.out.println("Empty");
+        } else {
+            for (Resume r : all) {
+                System.out.println(r.hashCode());
             }
         }
         System.out.println("----------------------------");

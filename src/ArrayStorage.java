@@ -18,6 +18,13 @@ public class ArrayStorage {
         counter++;
     }
 
+    void update(Resume resume) {
+        for (int i = 0; i < counter; i++)
+            if (storage[i].uuid.equals(resume.uuid)) {
+                storage[i] = resume;
+            }
+    }
+
     Resume get(String uuid) {
         for (int i = 0; i < counter; i++) {
             if (storage[i].uuid.equals(uuid)) {
