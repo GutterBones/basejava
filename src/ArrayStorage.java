@@ -14,15 +14,29 @@ public class ArrayStorage {
     }
 
     void save(Resume resume) {
+        for (int i = 0; i < counter; i++) {
+            if (storage[i].uuid.equals(resume.uuid)) {
+                System.out.println("Resume already exists!");
+                return;
+            }
+        }
+        if (counter >= 10000) {
+            System.out.println("Storage is full, delete some elements!");
+            return;
+        }
         storage[counter] = resume;
         counter++;
     }
 
+
     void update(Resume resume) {
-        for (int i = 0; i < counter; i++)
+        for (int i = 0; i < counter; i++) {
             if (storage[i].uuid.equals(resume.uuid)) {
                 storage[i] = resume;
+                return;
             }
+        }
+        System.out.println("Resume not found");
     }
 
     Resume get(String uuid) {
@@ -31,6 +45,7 @@ public class ArrayStorage {
                 return storage[i];
             }
         }
+        System.out.println("Resume not found");
         return null;
     }
 
@@ -45,9 +60,10 @@ public class ArrayStorage {
                 //    storage[j] = storage[j+1];
                 //storage [counter-1] = null;
                 counter--;
-                break;
+                return;
             }
         }
+        System.out.println("Resume not found");
     }
 
     /**
