@@ -1,8 +1,13 @@
+package com.webapp;
+
+import com.webapp.model.Resume;
+import com.webapp.storage.ArrayStorage;
+
 /**
- * Test for your ArrayStorage implementation
+ * Test for your com.webapp.storage.ArrayStorage implementation
  */
 public class MainTestArrayStorage {
-    static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    private static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume();
@@ -47,14 +52,14 @@ public class MainTestArrayStorage {
         printAll();
     }
 
-    static void printAll() {
+    private static void printAll() {
         System.out.println("\nGet All");
         for (Resume r : ARRAY_STORAGE.getAll()) {
             System.out.println(r);
         }
     }
 
-    static void printHashAll() {
+    private static void printHashAll() {
         System.out.println("\nHash All");
         for (Resume r : ARRAY_STORAGE.getAll()) {
             System.out.println(r.hashCode());

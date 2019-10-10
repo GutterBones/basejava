@@ -1,26 +1,30 @@
+package com.webapp.storage;
+
+import com.webapp.model.Resume;
+
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    Resume[] storage = new Resume[10000];
+    private Resume[] storage = new Resume[10_000];
     // storage elements counter
     private int counter;
 
-    void clear() {
+    public void clear() {
         for (int i = 0; i < counter; i++) {
             storage[i] = null;
         }
         counter = 0;
     }
 
-    void save(Resume resume) {
+    public void save(Resume resume) {
         for (int i = 0; i < counter; i++) {
             if (storage[i].uuid.equals(resume.uuid)) {
                 System.out.println("Resume already exists!");
                 return;
             }
         }
-        if (counter >= 10000) {
+        if (counter >= storage.length) {
             System.out.println("Storage is full, delete some elements!");
             return;
         }
@@ -29,7 +33,7 @@ public class ArrayStorage {
     }
 
 
-    void update(Resume resume) {
+    public void update(Resume resume) {
         for (int i = 0; i < counter; i++) {
             if (storage[i].uuid.equals(resume.uuid)) {
                 storage[i] = resume;
@@ -39,7 +43,7 @@ public class ArrayStorage {
         System.out.println("Resume not found");
     }
 
-    Resume get(String uuid) {
+    public Resume get(String uuid) {
         for (int i = 0; i < counter; i++) {
             if (storage[i].uuid.equals(uuid)) {
                 return storage[i];
@@ -49,7 +53,7 @@ public class ArrayStorage {
         return null;
     }
 
-    void delete(String uuid) {
+    public void delete(String uuid) {
         for (int i = 0; i < counter; i++) {
             if (storage[i].uuid.equals(uuid)) {
                 if (counter - 1 - i >= 0) {
@@ -69,7 +73,7 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    Resume[] getAll() {
+    public Resume[] getAll() {
         Resume[] resumes = new Resume[counter];
         //for (int i = 0; i < counter; i++)
         //      resumes[i] = storage[i];
@@ -77,7 +81,7 @@ public class ArrayStorage {
         return resumes;
     }
 
-    int size() {
+    public int size() {
         return counter;
     }
 }
