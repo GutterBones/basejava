@@ -43,7 +43,7 @@ public class MainTestArrayStorage {
 
         System.out.println("Size: " + ARRAY_STORAGE.size());
 
-        Resume[] resumes = new Resume[10000];
+        Resume[] resumes = new Resume[10_001];
         for (int i = 0; i < resumes.length; i++) {
             resumes[i] = new Resume();
             resumes[i].uuid = "R" + i;
