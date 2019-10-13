@@ -2,6 +2,8 @@ package com.webapp.storage;
 
 import com.webapp.model.Resume;
 
+import java.util.Arrays;
+
 /**
  * Array based storage for Resumes
  */
@@ -11,9 +13,7 @@ public class ArrayStorage {
     private int counter;
 
     public void clear() {
-        for (int i = 0; i < counter; i++) {
-            storage[i] = null;
-        }
+        Arrays.fill(storage,null);
         counter = 0;
     }
 
