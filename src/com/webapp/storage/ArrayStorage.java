@@ -13,12 +13,12 @@ public class ArrayStorage {
     private int counter;
 
     public void clear() {
-        Arrays.fill(storage,null);
+        Arrays.fill(storage, 0, counter - 1, null);
         counter = 0;
     }
 
     public void save(Resume resume) {
-        int index = presentInd(resume.getUuid());
+        int index = getIndex(resume.getUuid());
         if (index != -1) {
             System.out.println("Resume with uuid " + resume.getUuid() + " already exists!");
             return;
@@ -33,7 +33,7 @@ public class ArrayStorage {
 
 
     public void update(Resume resume) {
-        int index = presentInd(resume.getUuid());
+        int index = getIndex(resume.getUuid());
         if (index == -1) {
             System.out.println("Resume with uuid " + resume.getUuid() + " not found");
         } else {
@@ -42,7 +42,7 @@ public class ArrayStorage {
     }
 
     public Resume get(String uuid) {
-        int index = presentInd(uuid);
+        int index = getIndex(uuid);
         if (index == -1) {
             System.out.println("Resume with uuid " + uuid + " not found");
         } else {
@@ -52,7 +52,7 @@ public class ArrayStorage {
     }
 
     public void delete(String uuid) {
-        int index = presentInd(uuid);
+        int index = getIndex(uuid);
         if (index == -1) {
             System.out.println("Resume with uuid " + uuid + " not found");
         } else {
@@ -66,16 +66,14 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     public Resume[] getAll() {
-        Resume[] resumes = new Resume[counter];
-        System.arraycopy(storage, 0, resumes, 0, counter);
-        return resumes;
+        return Arrays.copyOf(storage, counter);
     }
 
     public int size() {
         return counter;
     }
 
-    private int presentInd(String uuid) {
+    private int getIndex(String uuid) {
         for (int i = 0; i < counter; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
