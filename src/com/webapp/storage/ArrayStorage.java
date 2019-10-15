@@ -36,30 +36,29 @@ public class ArrayStorage {
         int index = getIndex(resume.getUuid());
         if (index == -1) {
             System.out.println("Resume with uuid " + resume.getUuid() + " not found");
-        } else {
-            storage[index] = resume;
+            return;
         }
+        storage[index] = resume;
     }
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
         if (index == -1) {
             System.out.println("Resume with uuid " + uuid + " not found");
-        } else {
-            return storage[index];
+            return null;
         }
-        return null;
+        return storage[index];
     }
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
         if (index == -1) {
             System.out.println("Resume with uuid " + uuid + " not found");
-        } else {
-            System.arraycopy(storage, index + 1, storage, index, counter - 1 - index);
-            storage[counter - 1] = null;
-            counter--;
+            return;
         }
+        System.arraycopy(storage, index + 1, storage, index, counter - 1 - index);
+        storage[counter - 1] = null;
+        counter--;
     }
 
     /**
