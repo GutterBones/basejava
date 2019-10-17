@@ -50,6 +50,7 @@ public class MainTestArrayStorage {
             ARRAY_STORAGE.save(resumes[i]);
         }
         printAll();
+
     }
 
     private static void printAll() {
