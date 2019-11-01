@@ -25,7 +25,6 @@ public abstract class AbstractArrayStorage implements Storage {
             System.out.println("Storage is full, delete some elements!");
             return;
         }
-        //storage[counter] = resume;
         addElem(index, resume);
         counter++;
     }
@@ -67,6 +66,7 @@ public abstract class AbstractArrayStorage implements Storage {
         return Arrays.copyOf(storage, counter);
     }
 
-    protected abstract int getIndex (String uuid);
-    protected abstract void addElem (int index, Resume resume);
+    protected abstract int getIndex(String uuid);
+
+    protected abstract void addElem(int index, Resume resume);
 }
