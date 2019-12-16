@@ -21,4 +21,9 @@ public class ArrayStorage extends AbstractArrayStorage {
     protected void addElem(int index, Resume resume) {
         storage[counter] = resume;
     }
+
+    @Override
+    protected void shiftDel(int index) {
+        storage[index] = storage[counter - 1];
+    }
 }

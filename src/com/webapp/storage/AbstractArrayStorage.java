@@ -40,11 +40,14 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public void delete(String uuid) {
         int index = getIndex(uuid);
+        int delLength = counter - 1 - index;
         if (index < 0) {
             System.out.println("Resume with uuid " + uuid + " not found");
             return;
         }
-        System.arraycopy(storage, index + 1, storage, index, counter - 1 - index);
+        if (delLength > 0) {
+            shiftDel(index);
+        }
         storage[counter - 1] = null;
         counter--;
     }
@@ -69,4 +72,6 @@ public abstract class AbstractArrayStorage implements Storage {
     protected abstract int getIndex(String uuid);
 
     protected abstract void addElem(int index, Resume resume);
+
+    protected abstract void shiftDel(int index);
 }
